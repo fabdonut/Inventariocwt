@@ -1,4 +1,4 @@
-perfect_html = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -22,7 +22,7 @@ perfect_html = """<!DOCTYPE html>
                         cwt: {
                             50: '#f0f4fa',
                             100: '#d9e2f2',
-                            800: '#002060', // Dark corporate navy
+                            800: '#002060',
                             900: '#001540',
                             accent: '#0055ff'
                         }
@@ -109,7 +109,7 @@ perfect_html = """<!DOCTYPE html>
                         <input type="text" id="adminUserInput" placeholder="FABRIZIO TERRONES" required class="w-full px-4 py-3 border border-slate-300 rounded-xl font-medium focus:ring-2 focus:ring-cwt-800 focus:outline-none">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Contraseña / DNI</label>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Contraseña</label>
                         <input type="password" id="adminPassInput" placeholder="••••••••" required class="w-full px-4 py-3 border border-slate-300 rounded-xl font-medium focus:ring-2 focus:ring-cwt-800 focus:outline-none">
                     </div>
 
@@ -167,6 +167,9 @@ perfect_html = """<!DOCTYPE html>
                     </div>
 
                     <!-- ADMIN TOOLS -->
+                    <button id="adminManageUsersBtn" onclick="openAdminAccountsModal()" class="hidden bg-blue-700 hover:bg-blue-600 text-white text-xs font-bold px-3 py-2 rounded-xl transition items-center gap-1.5 shadow">
+                        <i class="fa-solid fa-users-gear"></i> <span class="hidden sm:inline">Gestionar Admins</span>
+                    </button>
                     <button id="adminAddProductBtn" onclick="openProductModal()" class="hidden bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-3 py-2 rounded-xl transition items-center gap-1.5 shadow">
                         <i class="fa-solid fa-plus"></i> <span class="hidden sm:inline">Nuevo Producto / Código</span>
                     </button>
@@ -342,7 +345,7 @@ perfect_html = """<!DOCTYPE html>
                         </table>
                     </div>
 
-                    <!-- KARDEX TAB WITH EXPLICIT DATES -->
+                    <!-- KARDEX TAB WITH EXPLICIT DATES AND ADMIN ACTIONS -->
                     <div id="tabKardex" class="p-4 flex-1 overflow-x-auto hidden">
                         <table class="w-full text-left text-xs">
                             <thead>
@@ -353,6 +356,7 @@ perfect_html = """<!DOCTYPE html>
                                     <th class="pb-2">Código - Producto</th>
                                     <th class="pb-2 text-center">Cant.</th>
                                     <th class="pb-2 text-center">Stock Result.</th>
+                                    <th id="kardexActionsHeader" class="pb-2 text-right">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody id="kardexBody" class="divide-y divide-slate-100">
@@ -436,6 +440,95 @@ perfect_html = """<!DOCTYPE html>
         </div>
     </div>
 
+    <!-- MODAL: EDITAR REGISTRO DEL KARDEX -->
+    <div id="kardexModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl shadow-2xl p-6 max-w-md w-full border-t-8 border-cwt-800">
+            <div class="flex items-center justify-between pb-3 border-b mb-4">
+                <h3 class="font-bold text-base text-cwt-800">Editar Registro del Kardex</h3>
+                <button onclick="closeKardexModal()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <form id="kardexForm" onsubmit="saveKardexEntry(event)" class="space-y-4">
+                <input type="hidden" id="editKardexIndex" value="-1">
+                <div>
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Fecha y Hora</label>
+                    <input type="text" id="editKardexDate" required class="w-full border rounded-xl p-2.5 text-xs font-semibold">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Nombre del Operador</label>
+                    <input type="text" id="editKardexUser" required class="w-full border rounded-xl p-2.5 text-xs font-semibold">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Tipo Movimiento</label>
+                        <select id="editKardexType" class="w-full border rounded-xl p-2.5 text-xs font-semibold">
+                            <option value="ENTRADA">ENTRADA</option>
+                            <option value="SALIDA">SALIDA</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Cantidad</label>
+                        <input type="number" id="editKardexQty" min="1" required class="w-full border rounded-xl p-2.5 text-xs font-bold">
+                    </div>
+                </div>
+                <div class="pt-2 flex justify-end gap-2">
+                    <button type="button" onclick="closeKardexModal()" class="px-4 py-2 border rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100">Cancelar</button>
+                    <button type="submit" class="px-5 py-2 bg-cwt-800 text-white rounded-xl text-xs font-bold hover:bg-cwt-900 shadow-md">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: GESTIONAR CUENTAS ADMINISTRATIVAS -->
+    <div id="adminAccountsModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl shadow-2xl p-6 max-w-lg w-full border-t-8 border-cwt-800 space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b">
+                <h3 class="font-bold text-base text-cwt-800"><i class="fa-solid fa-users-gear mr-2"></i>Gestionar Cuentas de Administrador</h3>
+                <button onclick="closeAdminAccountsModal()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+
+            <!-- TABLA DE CUENTAS ACTUALES -->
+            <div class="space-y-2">
+                <span class="text-xs font-bold text-slate-500 uppercase">Cuentas Registradas</span>
+                <div class="max-h-40 overflow-y-auto border rounded-xl divide-y bg-slate-50">
+                    <table class="w-full text-xs text-left">
+                        <thead class="bg-slate-100 text-[10px] text-slate-500 uppercase">
+                            <tr>
+                                <th class="p-2">Usuario</th>
+                                <th class="p-2">Contraseña</th>
+                                <th class="p-2 text-right">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminAccountsListBody" class="divide-y">
+                            <!-- Dynamic rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- FORMULARIO AGREGAR NUEVA CUENTA -->
+            <form onsubmit="addNewAdminAccount(event)" class="space-y-3 pt-2 border-t">
+                <span class="text-xs font-bold text-cwt-800 uppercase block">Agregar Nuevo Administrador</span>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Nombre / Usuario</label>
+                        <input type="text" id="newAdminUser" required placeholder="Ej. MARIO SILVA" class="w-full border rounded-xl p-2.5 text-xs uppercase font-semibold">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Contraseña</label>
+                        <input type="password" id="newAdminPass" required placeholder="••••••••" class="w-full border rounded-xl p-2.5 text-xs font-semibold">
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-xs transition flex items-center justify-center gap-1.5 shadow">
+                    <i class="fa-solid fa-user-plus"></i> <span>Registrar Nuevo Administrador</span>
+                </button>
+            </form>
+
+            <div class="flex justify-end pt-2">
+                <button type="button" onclick="closeAdminAccountsModal()" class="px-4 py-2 border rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
     <!-- MODAL IMPRESIÓN DE ETIQUETA DE BARRAS CON LOGO CWT -->
     <div id="printModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-3xl p-6 max-w-sm w-full text-center space-y-4">
@@ -466,11 +559,13 @@ perfect_html = """<!DOCTYPE html>
 
     <!-- SCRIPT LOGIC -->
     <script>
-        // --- ADMIN CREDENTIALS ---
-        const ADMIN_ACCOUNTS = [
+        // --- ADMIN CREDENTIALS (GESTIONABLES & PERSISTENTES) ---
+        const DEFAULT_ADMIN_ACCOUNTS = [
             { user: "FABRIZIO TERRONES", pass: "70799159" },
             { user: "JOSE RAMOS", pass: "40371247" }
         ];
+
+        let adminAccounts = JSON.parse(localStorage.getItem('cwt_admin_accounts_v16')) || DEFAULT_ADMIN_ACCOUNTS;
 
         // --- INITIAL SEED DATA ---
         const INITIAL_PRODUCTS = [
@@ -491,8 +586,8 @@ perfect_html = """<!DOCTYPE html>
         ];
 
         // State Variables
-        let products = JSON.parse(localStorage.getItem('cwt_products_v15')) || INITIAL_PRODUCTS;
-        let kardex = JSON.parse(localStorage.getItem('cwt_kardex_v15')) || INITIAL_KARDEX;
+        let products = JSON.parse(localStorage.getItem('cwt_products_v16')) || INITIAL_PRODUCTS;
+        let kardex = JSON.parse(localStorage.getItem('cwt_kardex_v16')) || INITIAL_KARDEX;
         let currentUser = null;
         let currentRole = 'OPERADOR';
         let html5QrcodeScanner = null;
@@ -566,7 +661,7 @@ perfect_html = """<!DOCTYPE html>
             const userInput = document.getElementById('adminUserInput').value.trim().toUpperCase();
             const passInput = document.getElementById('adminPassInput').value.trim();
 
-            const match = ADMIN_ACCOUNTS.find(a => a.user.toUpperCase() === userInput && a.pass === passInput);
+            const match = adminAccounts.find(a => a.user.toUpperCase() === userInput && a.pass === passInput);
 
             if(match) {
                 currentUser = match.user;
@@ -589,8 +684,11 @@ perfect_html = """<!DOCTYPE html>
             if(currentRole === 'ADMIN') {
                 document.getElementById('adminAddProductBtn').classList.remove('hidden');
                 document.getElementById('adminAddProductBtn').classList.add('flex');
+                document.getElementById('adminManageUsersBtn').classList.remove('hidden');
+                document.getElementById('adminManageUsersBtn').classList.add('flex');
             } else {
                 document.getElementById('adminAddProductBtn').classList.add('hidden');
+                document.getElementById('adminManageUsersBtn').classList.add('hidden');
             }
 
             initApp();
@@ -687,18 +785,38 @@ perfect_html = """<!DOCTYPE html>
 
         function renderKardex() {
             const tbody = document.getElementById('kardexBody');
+            const actionsHeader = document.getElementById('kardexActionsHeader');
             tbody.innerHTML = '';
 
+            if(currentRole === 'ADMIN') {
+                actionsHeader.classList.remove('hidden');
+            } else {
+                actionsHeader.classList.add('hidden');
+            }
+
             if(kardex.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="text-center py-6 text-slate-400">Sin movimientos en el historial.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="7" class="text-center py-6 text-slate-400">Sin movimientos en el historial.</td></tr>`;
                 return;
             }
 
-            kardex.slice(-25).reverse().forEach(k => {
+            kardex.slice().reverse().forEach((k, displayIdx) => {
+                const realIndex = kardex.length - 1 - displayIdx;
                 const isEntry = k.type === 'ENTRADA';
                 const badge = isEntry 
                     ? '<span class="text-emerald-600 font-bold">[+] ENTRADA</span>'
                     : '<span class="text-rose-600 font-bold">[-] SALIDA</span>';
+
+                let adminKardexActions = '';
+                if(currentRole === 'ADMIN') {
+                    adminKardexActions = `
+                        <td class="py-2.5 text-right font-medium">
+                            <button onclick="editKardexEntry(${realIndex})" title="Editar Registro" class="text-slate-400 hover:text-blue-600 p-1"><i class="fa-solid fa-pen"></i></button>
+                            <button onclick="deleteKardexEntry(${realIndex})" title="Borrar Registro" class="text-slate-400 hover:text-rose-600 p-1"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    `;
+                } else {
+                    adminKardexActions = `<td class="hidden"></td>`;
+                }
 
                 tbody.innerHTML += `
                     <tr class="hover:bg-slate-50 border-b border-slate-100">
@@ -708,9 +826,126 @@ perfect_html = """<!DOCTYPE html>
                         <td class="py-2.5 font-medium"><strong class="font-mono text-cwt-800">${k.barcode}</strong> - ${k.name}</td>
                         <td class="py-2.5 text-center font-bold">${k.qty} ${k.unit}</td>
                         <td class="py-2.5 text-center font-black text-slate-800">${k.resultStock}</td>
+                        ${adminKardexActions}
                     </tr>
                 `;
             });
+        }
+
+        // --- GESTIÓN DE EDICIÓN Y BORRADO EN EL KARDEX ---
+        function deleteKardexEntry(index) {
+            if(index < 0 || index >= kardex.length) return;
+            const entry = kardex[index];
+            if(!confirm(`¿Estás seguro de eliminar el registro de ${entry.type} de ${entry.qty} ${entry.unit} de ${entry.name}?`)) return;
+
+            kardex.splice(index, 1);
+            localStorage.setItem('cwt_kardex_v16', JSON.stringify(kardex));
+            renderKardex();
+            updateStats();
+            showToast('Registro eliminado del historial del Kardex', 'info');
+        }
+
+        function editKardexEntry(index) {
+            if(index < 0 || index >= kardex.length) return;
+            const entry = kardex[index];
+
+            document.getElementById('editKardexIndex').value = index;
+            document.getElementById('editKardexDate').value = entry.date;
+            document.getElementById('editKardexUser').value = entry.user;
+            document.getElementById('editKardexType').value = entry.type;
+            document.getElementById('editKardexQty').value = entry.qty;
+
+            document.getElementById('kardexModal').classList.remove('hidden');
+        }
+
+        function closeKardexModal() {
+            document.getElementById('kardexModal').classList.add('hidden');
+        }
+
+        function saveKardexEntry(e) {
+            e.preventDefault();
+            const idx = parseInt(document.getElementById('editKardexIndex').value);
+            if(idx < 0 || idx >= kardex.length) return;
+
+            kardex[idx].date = document.getElementById('editKardexDate').value.trim();
+            kardex[idx].user = document.getElementById('editKardexUser').value.trim();
+            kardex[idx].type = document.getElementById('editKardexType').value;
+            kardex[idx].qty = parseInt(document.getElementById('editKardexQty').value) || 1;
+
+            localStorage.setItem('cwt_kardex_v16', JSON.stringify(kardex));
+            renderKardex();
+            updateStats();
+            closeKardexModal();
+            showToast('Registro del Kardex actualizado con éxito', 'success');
+        }
+
+        // --- GESTIÓN DE CUENTAS ADMINISTRATIVAS ---
+        function openAdminAccountsModal() {
+            renderAdminAccountsList();
+            document.getElementById('adminAccountsModal').classList.remove('hidden');
+        }
+
+        function closeAdminAccountsModal() {
+            document.getElementById('adminAccountsModal').classList.add('hidden');
+        }
+
+        function renderAdminAccountsList() {
+            const tbody = document.getElementById('adminAccountsListBody');
+            tbody.innerHTML = '';
+
+            adminAccounts.forEach((acc, idx) => {
+                let deleteBtn = `<button onclick="deleteAdminAccount(${idx})" title="Eliminar Admin" class="text-slate-400 hover:text-rose-600 p-1"><i class="fa-solid fa-trash"></i></button>`;
+                if(adminAccounts.length <= 1) {
+                    deleteBtn = `<span class="text-[10px] text-slate-300 italic">Mínimo 1 admin</span>`;
+                }
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="p-2 font-bold text-cwt-800">${acc.user}</td>
+                        <td class="p-2 font-mono text-slate-600">••••••••</td>
+                        <td class="p-2 text-right">${deleteBtn}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        function addNewAdminAccount(e) {
+            e.preventDefault();
+            const newUser = document.getElementById('newAdminUser').value.trim().toUpperCase();
+            const newPass = document.getElementById('newAdminPass').value.trim();
+
+            if(!newUser || !newPass) {
+                showToast('Por favor completa usuario y contraseña', 'warning');
+                return;
+            }
+
+            if(adminAccounts.some(a => a.user.toUpperCase() === newUser)) {
+                showToast('Este usuario administrador ya existe', 'error');
+                return;
+            }
+
+            adminAccounts.push({ user: newUser, pass: newPass });
+            localStorage.setItem('cwt_admin_accounts_v16', JSON.stringify(adminAccounts));
+            
+            document.getElementById('newAdminUser').value = '';
+            document.getElementById('newAdminPass').value = '';
+
+            renderAdminAccountsList();
+            showToast(`Cuenta de administrador agregada: ${newUser}`, 'success');
+        }
+
+        function deleteAdminAccount(idx) {
+            if(adminAccounts.length <= 1) {
+                showToast('Debe existir al menos un administrador en el sistema', 'error');
+                return;
+            }
+            const acc = adminAccounts[idx];
+            if(!confirm(`¿Estás seguro de eliminar al administrador ${acc.user}?`)) return;
+
+            adminAccounts.splice(idx, 1);
+            localStorage.setItem('cwt_admin_accounts_v16', JSON.stringify(adminAccounts));
+            renderAdminAccountsList();
+            showToast('Cuenta de administrador eliminada', 'info');
         }
 
         function updateStats() {
@@ -751,7 +986,6 @@ perfect_html = """<!DOCTYPE html>
                 document.getElementById('detectedStock').innerText = `${p.stock} ${p.unit}`;
                 document.getElementById('detectedROP').innerText = p.rop;
                 
-                // Show unit of measure next to CANTIDAD DE LOTE
                 qtyUnitBadge.innerText = `(${p.unit})`;
 
                 const badge = document.getElementById('detectedBadge');
@@ -839,8 +1073,8 @@ perfect_html = """<!DOCTYPE html>
 
             kardex.push(entry);
 
-            localStorage.setItem('cwt_products_v15', JSON.stringify(products));
-            localStorage.setItem('cwt_kardex_v15', JSON.stringify(kardex));
+            localStorage.setItem('cwt_products_v16', JSON.stringify(products));
+            localStorage.setItem('cwt_kardex_v16', JSON.stringify(kardex));
 
             renderInventory();
             renderKardex();
@@ -867,10 +1101,9 @@ perfect_html = """<!DOCTYPE html>
 
             const cameraConfig = {
                 fps: 20,
-                qrbox: { width: 260, height: 160 } // Standard 1D barcode aspect box
+                qrbox: { width: 260, height: 160 }
             };
 
-            // Bulletproof start sequence: try rear camera first, fallback smoothly to user/any camera
             html5QrcodeScanner.start(
                 { facingMode: "environment" },
                 cameraConfig,
@@ -880,7 +1113,6 @@ perfect_html = """<!DOCTYPE html>
                 cameraRunning = true;
                 document.getElementById('cameraBtnText').innerText = "Cerrar Cámara";
             }).catch(() => {
-                // Fallback to front or laptop webcam
                 html5QrcodeScanner.start(
                     { facingMode: "user" },
                     cameraConfig,
@@ -977,7 +1209,7 @@ perfect_html = """<!DOCTYPE html>
                 showToast('Nuevo producto registrado en la base de datos', 'success');
             }
 
-            localStorage.setItem('cwt_products_v15', JSON.stringify(products));
+            localStorage.setItem('cwt_products_v16', JSON.stringify(products));
             renderInventory();
             updateStats();
             closeProductModal();
@@ -1004,7 +1236,7 @@ perfect_html = """<!DOCTYPE html>
         function deleteProduct(barcode) {
             if(!confirm(`¿Estás seguro de eliminar el producto con código ${barcode}?`)) return;
             products = products.filter(p => p.barcode !== barcode);
-            localStorage.setItem('cwt_products_v15', JSON.stringify(products));
+            localStorage.setItem('cwt_products_v16', JSON.stringify(products));
             renderInventory();
             updateStats();
             showToast('Producto eliminado', 'info');
@@ -1036,7 +1268,6 @@ perfect_html = """<!DOCTYPE html>
             }
 
             try {
-                // Prepare dataset for SheetJS
                 var data = [
                     ["Fecha y Hora", "Operador", "Almacén", "Tipo", "Código", "Producto", "Cantidad", "Unidad", "Stock Resultante"]
                 ];
@@ -1055,23 +1286,21 @@ perfect_html = """<!DOCTYPE html>
                     ]);
                 });
 
-                // If SheetJS library is active, create native binary .xlsx file
                 if (typeof XLSX !== 'undefined') {
                     var ws = XLSX.utils.aoa_to_sheet(data);
                     var wb = XLSX.utils.book_new();
                     XLSX.utils.book_append_sheet(wb, ws, "Kardex_CWT");
                     
-                    // Auto-adjust column widths
                     ws['!cols'] = [
-                        { wch: 22 }, // Fecha
-                        { wch: 20 }, // Operador
-                        { wch: 45 }, // Almacén
-                        { wch: 12 }, // Tipo
-                        { wch: 10 }, // Código
-                        { wch: 30 }, // Producto
-                        { wch: 10 }, // Cantidad
-                        { wch: 10 }, // Unidad
-                        { wch: 16 }  // Stock Resultante
+                        { wch: 22 },
+                        { wch: 20 },
+                        { wch: 45 },
+                        { wch: 12 },
+                        { wch: 10 },
+                        { wch: 30 },
+                        { wch: 10 },
+                        { wch: 10 },
+                        { wch: 16 }
                     ];
 
                     XLSX.writeFile(wb, "Kardex_CWT_" + new Date().toISOString().split('T')[0] + ".xlsx");
@@ -1079,12 +1308,11 @@ perfect_html = """<!DOCTYPE html>
                     return;
                 }
             } catch(e) {
-                console.error("SheetJS export error, falling back to TSV:", e);
+                console.error("SheetJS export error:", e);
             }
 
-            // Fallback: TSV with \\t column separator which Excel splits into columns A, B, C... automatically
             let tsvRows = [];
-            tsvRows.push(["Fecha y Hora", "Operador", "Almacén", "Tipo", "Código", "Producto", "Cantidad", "Unidad", "Stock Resultante"].join("\\t"));
+            tsvRows.push(["Fecha y Hora", "Operador", "Almacén", "Tipo", "Código", "Producto", "Cantidad", "Unidad", "Stock Resultante"].join("\t"));
 
             kardex.forEach(k => {
                 let whName = getWarehouseName(k.warehouse);
@@ -1098,11 +1326,11 @@ perfect_html = """<!DOCTYPE html>
                     k.qty,
                     k.unit,
                     k.resultStock
-                ].join("\\t"));
+                ].join("\t"));
             });
 
             let bom = String.fromCharCode(0xFEFF);
-            let tsvString = bom + tsvRows.join("\\r\\n");
+            let tsvString = bom + tsvRows.join("\r\n");
             
             let blob = new Blob([tsvString], { type: "text/tab-separated-values;charset=utf-8;" });
             let url = URL.createObjectURL(blob);
@@ -1174,9 +1402,3 @@ perfect_html = """<!DOCTYPE html>
     </script>
 </body>
 </html>
-"""
-
-with open("index.html", "w", encoding="utf-8") as f:
-    f.write(clean_index_html)
-
-print("Saved clean index.html with SheetJS native Excel export! Size:", len(clean_index_html))
