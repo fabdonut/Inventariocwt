@@ -1,8 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
+optimized_html = """<!DOCTYPE html>
+<html lang="es" class="overflow-x-hidden">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>CWT - Clean Water Technology | Control de Inventario</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -32,6 +32,10 @@
         }
     </script>
     <style>
+        html, body {
+            max-width: 100vw !important;
+            overflow-x: hidden !important;
+        }
         #reader video {
             width: 100% !important;
             height: auto !important;
@@ -45,52 +49,52 @@
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans antialiased">
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans antialiased overflow-x-hidden">
 
     <!-- LOGIN SCREEN -->
-    <div id="loginScreen" class="fixed inset-0 bg-cwt-900/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden border border-slate-100">
+    <div id="loginScreen" class="fixed inset-0 bg-cwt-900/90 backdrop-blur-md z-50 flex items-center justify-center p-3 sm:p-4">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden border border-slate-100 max-w-full">
             <!-- Header with Official CWT Logo SVG -->
-            <div class="bg-cwt-800 p-6 text-white text-center relative">
-                <div class="flex items-center justify-center gap-3 mb-2">
-                    <svg class="w-12 h-12 text-white" viewBox="0 0 100 100" fill="currentColor">
+            <div class="bg-cwt-800 p-5 sm:p-6 text-white text-center relative">
+                <div class="flex items-center justify-center gap-2 sm:gap-3 mb-2">
+                    <svg class="w-10 h-10 sm:w-12 sm:h-12 text-white" viewBox="0 0 100 100" fill="currentColor">
                         <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="6"/>
                         <path d="M50 5 A45 45 0 0 1 50 95 A45 45 0 0 1 50 5" fill="none" stroke="currentColor" stroke-width="3"/>
                         <path d="M5 50 A45 45 0 0 1 95 50 A45 45 0 0 1 5 50" fill="none" stroke="currentColor" stroke-width="3"/>
                         <path d="M20 30 Q 50 10 80 30 Q 50 50 20 30 Z" fill="currentColor" opacity="0.8"/>
                         <path d="M15 65 Q 50 45 85 65 Q 50 85 15 65 Z" fill="currentColor" opacity="0.8"/>
                     </svg>
-                    <span class="text-4xl font-black tracking-tighter text-white font-sans">CWT</span>
+                    <span class="text-3xl sm:text-4xl font-black tracking-tighter text-white font-sans">CWT</span>
                 </div>
-                <h1 class="text-lg font-bold tracking-tight">CLEAN WATER TECHNOLOGY</h1>
-                <p class="text-xs text-blue-200 mt-0.5 uppercase tracking-widest font-semibold">Sistema de Inventario & Kardex</p>
+                <h1 class="text-base sm:text-lg font-bold tracking-tight">CLEAN WATER TECHNOLOGY</h1>
+                <p class="text-[10px] sm:text-xs text-blue-200 mt-0.5 uppercase tracking-widest font-semibold">Sistema de Inventario & Kardex</p>
             </div>
 
             <!-- Role Tabs -->
             <div class="flex border-b border-slate-200 bg-slate-50">
-                <button id="tabOpBtn" onclick="setLoginRole('OPERADOR')" class="flex-1 py-3 text-xs font-bold uppercase tracking-wider text-cwt-800 border-b-2 border-cwt-800 bg-white transition">
-                    <i class="fa-solid fa-hard-hat mr-1.5"></i> Operador / Almacén
+                <button id="tabOpBtn" onclick="setLoginRole('OPERADOR')" class="flex-1 py-3 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-cwt-800 border-b-2 border-cwt-800 bg-white transition">
+                    <i class="fa-solid fa-hard-hat mr-1"></i> Operador
                 </button>
-                <button id="tabAdminBtn" onclick="setLoginRole('ADMIN')" class="flex-1 py-3 text-xs font-bold uppercase tracking-wider text-slate-400 hover:text-slate-600 transition">
-                    <i class="fa-solid fa-user-shield mr-1.5"></i> Administrador
+                <button id="tabAdminBtn" onclick="setLoginRole('ADMIN')" class="flex-1 py-3 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 hover:text-slate-600 transition">
+                    <i class="fa-solid fa-user-shield mr-1"></i> Administrador
                 </button>
             </div>
 
-            <div class="p-6">
+            <div class="p-4 sm:p-6">
                 <!-- OPERATOR LOGIN FORM -->
                 <form id="opLoginForm" onsubmit="handleOperatorLogin(event)" class="space-y-4">
                     <div>
                         <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Nombre Completo del Operador</label>
                         <div class="relative">
                             <i class="fa-solid fa-id-card absolute left-3.5 top-3.5 text-slate-400"></i>
-                            <input type="text" id="opNameInput" placeholder="Ej. Juan Pérez" required class="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-xl font-medium focus:ring-2 focus:ring-cwt-800 focus:outline-none">
+                            <input type="text" id="opNameInput" placeholder="Ej. Juan Pérez" required class="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-xl font-medium focus:ring-2 focus:ring-cwt-800 focus:outline-none text-sm">
                         </div>
                         <p class="text-[11px] text-slate-400 mt-1">Ingresa tu nombre para firmar el registro de entradas y salidas.</p>
                     </div>
 
                     <div>
                         <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Almacén de Turno</label>
-                        <select id="opWarehouseInput" class="w-full px-4 py-3 border border-slate-300 rounded-xl font-semibold text-slate-700 focus:ring-2 focus:ring-cwt-800 focus:outline-none">
+                        <select id="opWarehouseInput" class="w-full px-3 py-3 border border-slate-300 rounded-xl font-semibold text-slate-700 text-xs sm:text-sm focus:ring-2 focus:ring-cwt-800 focus:outline-none">
                             <option value="quimicos_domestico">ALMACEN DE QUÍMICOS - ZONA C. DOMÉSTICO</option>
                             <option value="quimicos_elevador2">ALMACÉN DE QUÍMICOS - ZONA ELEVADOR 2</option>
                             <option value="materiales_elevador2">ALMACEN DE MATERIALES - ZONA ELEVADOR 2</option>
@@ -106,11 +110,11 @@
                 <form id="adminLoginForm" onsubmit="handleAdminLogin(event)" class="space-y-4 hidden">
                     <div>
                         <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Usuario Administrador</label>
-                        <input type="text" id="adminUserInput" placeholder="FABRIZIO TERRONES" required class="w-full px-4 py-3 border border-slate-300 rounded-xl font-medium focus:ring-2 focus:ring-cwt-800 focus:outline-none">
+                        <input type="text" id="adminUserInput" placeholder="FABRIZIO TERRONES" required class="w-full px-4 py-3 border border-slate-300 rounded-xl font-medium focus:ring-2 focus:ring-cwt-800 focus:outline-none text-sm">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Contraseña</label>
-                        <input type="password" id="adminPassInput" placeholder="••••••••" required class="w-full px-4 py-3 border border-slate-300 rounded-xl font-medium focus:ring-2 focus:ring-cwt-800 focus:outline-none">
+                        <input type="password" id="adminPassInput" placeholder="••••••••" required class="w-full px-4 py-3 border border-slate-300 rounded-xl font-medium focus:ring-2 focus:ring-cwt-800 focus:outline-none text-sm">
                     </div>
 
                     <button type="submit" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3.5 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
@@ -125,109 +129,106 @@
         </div>
     </div>
 
-    <!-- APP CONTENT (Hidden before login) -->
-    <div id="appContainer" class="hidden flex-col min-h-screen">
+    <!-- APP CONTENT -->
+    <div id="appContainer" class="hidden flex-col min-h-screen w-full max-w-full overflow-x-hidden">
         
         <!-- NAVBAR -->
-        <header class="bg-cwt-800 text-white sticky top-0 z-30 shadow-md">
-            <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
-                <div class="flex items-center gap-3">
-                    <!-- LOGO CWT WITH GLOBE -->
-                    <div class="flex items-center gap-2 bg-white px-2.5 py-1 rounded-xl shadow">
-                        <svg class="w-7 h-7 text-cwt-800" viewBox="0 0 100 100" fill="currentColor">
+        <header class="bg-cwt-800 text-white sticky top-0 z-30 shadow-md w-full">
+            <div class="max-w-7xl mx-auto px-3 sm:px-4 py-2.5 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-2 min-w-0">
+                    <!-- LOGO CWT -->
+                    <div class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-xl shadow shrink-0">
+                        <svg class="w-6 h-6 text-cwt-800" viewBox="0 0 100 100" fill="currentColor">
                             <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="8"/>
                             <path d="M50 5 A45 45 0 0 1 50 95 A45 45 0 0 1 50 5" fill="none" stroke="currentColor" stroke-width="4"/>
                             <path d="M5 50 A45 45 0 0 1 95 50 A45 45 0 0 1 5 50" fill="none" stroke="currentColor" stroke-width="4"/>
                         </svg>
-                        <span class="font-black text-xl text-cwt-800 tracking-tighter">CWT</span>
+                        <span class="font-black text-lg text-cwt-800 tracking-tighter">CWT</span>
                     </div>
-                    <div>
-                        <h1 class="font-bold text-sm sm:text-base leading-tight tracking-wide">CLEAN WATER TECHNOLOGY</h1>
-                        <p class="text-[11px] text-blue-200 flex flex-wrap items-center gap-1.5">
-                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                            <span id="sessionUserLabel">Operador: Juan</span>
+                    <div class="min-w-0">
+                        <h1 class="font-bold text-xs sm:text-sm leading-tight tracking-wide truncate">CLEAN WATER TECH</h1>
+                        <p class="text-[10px] text-blue-200 flex items-center gap-1 truncate">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+                            <span id="sessionUserLabel" class="truncate">Op: Juan</span>
                             <span class="opacity-40">|</span>
-                            <span id="sessionRoleBadge" class="bg-blue-900/80 text-blue-200 text-[10px] px-2 py-0.5 rounded-full uppercase font-bold">OPERADOR</span>
-                            <span class="opacity-40">|</span>
-                            <i class="fa-regular fa-clock text-blue-300"></i>
-                            <span id="liveClock" class="font-mono text-blue-100 font-bold">--/--/---- --:--</span>
+                            <span id="sessionRoleBadge" class="bg-blue-900/80 text-blue-200 text-[9px] px-1.5 py-0.2 rounded uppercase font-bold shrink-0">OP</span>
                         </p>
                     </div>
                 </div>
 
-                <div class="flex items-center gap-2 sm:gap-3">
-                    <!-- ALMACÉN SELECTOR -->
-                    <div class="bg-blue-950/60 border border-blue-400/30 rounded-xl px-2.5 py-1.5 flex items-center gap-2">
-                        <i class="fa-solid fa-warehouse text-blue-300 text-xs"></i>
-                        <select id="appWarehouseSelect" onchange="changeWarehouse()" class="bg-transparent text-white text-xs font-bold focus:outline-none cursor-pointer">
-                            <option value="quimicos_domestico" class="text-slate-800">ALMACEN DE QUÍMICOS - ZONA C. DOMÉSTICO</option>
-                            <option value="quimicos_elevador2" class="text-slate-800">ALMACÉN DE QUÍMICOS - ZONA ELEVADOR 2</option>
-                            <option value="materiales_elevador2" class="text-slate-800">ALMACEN DE MATERIALES - ZONA ELEVADOR 2</option>
+                <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                    <!-- ALMACÉN SELECTOR RESPONSIVO -->
+                    <div class="bg-blue-950/80 border border-blue-400/30 rounded-xl px-2 py-1 flex items-center gap-1 max-w-[150px] sm:max-w-none">
+                        <i class="fa-solid fa-warehouse text-blue-300 text-[10px] sm:text-xs shrink-0"></i>
+                        <select id="appWarehouseSelect" onchange="changeWarehouse()" class="bg-transparent text-white text-[11px] sm:text-xs font-bold focus:outline-none cursor-pointer w-full truncate">
+                            <option value="quimicos_domestico" class="text-slate-800">ZONA C. DOMÉSTICO</option>
+                            <option value="quimicos_elevador2" class="text-slate-800">ZONA ELEVADOR 2 (QUÍMICOS)</option>
+                            <option value="materiales_elevador2" class="text-slate-800">ZONA ELEVADOR 2 (MATERIALES)</option>
                         </select>
                     </div>
 
                     <!-- ADMIN TOOLS -->
-                    <button id="adminManageUsersBtn" onclick="openAdminAccountsModal()" class="hidden bg-blue-700 hover:bg-blue-600 text-white text-xs font-bold px-3 py-2 rounded-xl transition items-center gap-1.5 shadow">
-                        <i class="fa-solid fa-users-gear"></i> <span class="hidden sm:inline">Gestionar Admins</span>
+                    <button id="adminManageUsersBtn" onclick="openAdminAccountsModal()" class="hidden bg-blue-700 hover:bg-blue-600 text-white text-xs font-bold p-2 sm:px-3 sm:py-2 rounded-xl transition items-center gap-1.5 shadow" title="Gestionar Admins">
+                        <i class="fa-solid fa-users-gear"></i> <span class="hidden md:inline">Admins</span>
                     </button>
-                    <button id="adminAddProductBtn" onclick="openProductModal()" class="hidden bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-3 py-2 rounded-xl transition items-center gap-1.5 shadow">
-                        <i class="fa-solid fa-plus"></i> <span class="hidden sm:inline">Nuevo Producto / Código</span>
+                    <button id="adminAddProductBtn" onclick="openProductModal()" class="hidden bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold p-2 sm:px-3 sm:py-2 rounded-xl transition items-center gap-1.5 shadow" title="Nuevo Producto">
+                        <i class="fa-solid fa-plus"></i> <span class="hidden md:inline">Nuevo Producto</span>
                     </button>
 
-                    <button onclick="logout()" class="bg-red-500/80 hover:bg-red-600 text-white text-xs font-bold px-3 py-2 rounded-xl transition flex items-center gap-1" title="Cerrar Sesión">
-                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <button onclick="logout()" class="bg-red-500/80 hover:bg-red-600 text-white text-xs font-bold px-2.5 py-2 rounded-xl transition flex items-center gap-1" title="Cerrar Sesión">
+                        <i class="fa-solid fa-arrow-right-from-bracket text-xs"></i>
                     </button>
                 </div>
             </div>
         </header>
 
-        <!-- DASHBOARD STATS -->
-        <div class="max-w-7xl mx-auto w-full px-4 pt-6">
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-blue-50 text-cwt-800 flex items-center justify-center font-bold text-lg"><i class="fa-solid fa-boxes-stacked"></i></div>
+        <!-- DASHBOARD STATS (MOSTRADO SOLO A ADMINISTRADORES O EN PANTALLAS GRANDES) -->
+        <div id="dashboardStats" class="max-w-7xl mx-auto w-full px-3 sm:px-4 pt-4 sm:pt-6">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
+                <div class="bg-white p-3 sm:p-4 rounded-2xl border border-slate-200/80 shadow-sm flex items-center gap-2.5">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-blue-50 text-cwt-800 flex items-center justify-center font-bold text-sm sm:text-lg shrink-0"><i class="fa-solid fa-boxes-stacked"></i></div>
                     <div>
-                        <div class="text-[10px] font-bold uppercase text-slate-400">Total Items</div>
-                        <div id="statTotal" class="text-lg font-bold text-slate-800">0</div>
+                        <div class="text-[9px] sm:text-[10px] font-bold uppercase text-slate-400">Total Items</div>
+                        <div id="statTotal" class="text-base sm:text-lg font-bold text-slate-800">0</div>
                     </div>
                 </div>
-                <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-lg"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                <div class="bg-white p-3 sm:p-4 rounded-2xl border border-slate-200/80 shadow-sm flex items-center gap-2.5">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-sm sm:text-lg shrink-0"><i class="fa-solid fa-triangle-exclamation"></i></div>
                     <div>
-                        <div class="text-[10px] font-bold uppercase text-slate-400">Alertas Stock</div>
-                        <div id="statAlerts" class="text-lg font-bold text-amber-600">0</div>
+                        <div class="text-[9px] sm:text-[10px] font-bold uppercase text-slate-400">Alertas Stock</div>
+                        <div id="statAlerts" class="text-base sm:text-lg font-bold text-amber-600">0</div>
                     </div>
                 </div>
-                <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-lg"><i class="fa-solid fa-arrow-down"></i></div>
+                <div class="bg-white p-3 sm:p-4 rounded-2xl border border-slate-200/80 shadow-sm flex items-center gap-2.5">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-sm sm:text-lg shrink-0"><i class="fa-solid fa-arrow-down"></i></div>
                     <div>
-                        <div class="text-[10px] font-bold uppercase text-slate-400">Entradas Hoy</div>
-                        <div id="statEntradas" class="text-lg font-bold text-emerald-600">0</div>
+                        <div class="text-[9px] sm:text-[10px] font-bold uppercase text-slate-400">Entradas Hoy</div>
+                        <div id="statEntradas" class="text-base sm:text-lg font-bold text-emerald-600">0</div>
                     </div>
                 </div>
-                <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center font-bold text-lg"><i class="fa-solid fa-arrow-up"></i></div>
+                <div class="bg-white p-3 sm:p-4 rounded-2xl border border-slate-200/80 shadow-sm flex items-center gap-2.5">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center font-bold text-sm sm:text-lg shrink-0"><i class="fa-solid fa-arrow-up"></i></div>
                     <div>
-                        <div class="text-[10px] font-bold uppercase text-slate-400">Salidas Hoy</div>
-                        <div id="statSalidas" class="text-lg font-bold text-rose-600">0</div>
+                        <div class="text-[9px] sm:text-[10px] font-bold uppercase text-slate-400">Salidas Hoy</div>
+                        <div id="statSalidas" class="text-base sm:text-lg font-bold text-rose-600">0</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- MAIN LAYOUT -->
-        <main class="max-w-7xl mx-auto w-full px-4 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1">
+        <!-- MAIN LAYOUT MINIMALISTA -->
+        <main class="max-w-7xl mx-auto w-full px-3 sm:px-4 py-4 sm:py-6 grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 flex-1">
             
-            <!-- LEFT PANEL: ESCÁNER Y OPERACIONES -->
+            <!-- LEFT PANEL: ESCÁNER Y OPERACIONES (PRIORITARIO EN MÓVIL) -->
             <section class="lg:col-span-5 space-y-4">
                 
-                <div class="bg-white rounded-3xl border-2 border-cwt-800/10 shadow-md p-5 space-y-4">
-                    <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-                        <div class="flex items-center gap-2 font-bold text-cwt-800">
-                            <i class="fa-solid fa-barcode text-xl"></i>
+                <div class="bg-white rounded-3xl border-2 border-cwt-800/10 shadow-md p-4 sm:p-5 space-y-3.5">
+                    <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
+                        <div class="flex items-center gap-2 font-bold text-cwt-800 text-sm sm:text-base">
+                            <i class="fa-solid fa-barcode text-lg"></i>
                             <span>Escáner de Almacén</span>
                         </div>
-                        <button id="toggleCameraBtn" onclick="toggleCamera()" class="text-xs bg-cwt-50 hover:bg-cwt-100 text-cwt-800 px-3.5 py-2 rounded-xl font-bold transition flex items-center gap-2 shadow-sm border border-cwt-800/20">
+                        <button id="toggleCameraBtn" onclick="toggleCamera()" class="text-xs bg-cwt-50 hover:bg-cwt-100 text-cwt-800 px-3 py-1.5 rounded-xl font-bold transition flex items-center gap-1.5 shadow-sm border border-cwt-800/20">
                             <i class="fa-solid fa-camera"></i> <span id="cameraBtnText">Iniciar Cámara</span>
                         </button>
                     </div>
@@ -239,59 +240,59 @@
 
                     <!-- INPUT DE CÓDIGO -->
                     <div>
-                        <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1">Código del Bien / Producto</label>
+                        <label class="block text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase mb-1">Código del Bien / Producto</label>
                         <div class="relative">
-                            <input type="text" id="barcodeInput" autocomplete="off" placeholder="Escanea o escribe código..." class="w-full pl-10 pr-4 py-3.5 bg-slate-50 border-2 border-slate-200 rounded-2xl font-mono text-xl font-bold text-cwt-800 focus:border-cwt-800 focus:bg-white focus:outline-none transition">
-                            <i class="fa-solid fa-qrcode absolute left-3.5 top-4 text-slate-400 text-lg"></i>
+                            <input type="text" id="barcodeInput" autocomplete="off" placeholder="Escanea o escribe código..." class="w-full pl-9 pr-3 py-3 bg-slate-50 border-2 border-slate-200 rounded-2xl font-mono text-lg font-bold text-cwt-800 focus:border-cwt-800 focus:bg-white focus:outline-none transition">
+                            <i class="fa-solid fa-qrcode absolute left-3 top-3.5 text-slate-400 text-base"></i>
                         </div>
                     </div>
 
                     <!-- DETECCIÓN EN TIEMPO REAL -->
-                    <div id="detectedCard" class="hidden bg-slate-50 border border-slate-200 rounded-2xl p-4 text-sm space-y-2">
-                        <div class="flex items-center justify-between">
-                            <span id="detectedName" class="font-bold text-cwt-800 text-base">Producto</span>
-                            <span id="detectedBadge" class="text-xs px-2.5 py-1 rounded-full font-bold bg-emerald-100 text-emerald-800">Stock OK</span>
+                    <div id="detectedCard" class="hidden bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-xs sm:text-sm space-y-2">
+                        <div class="flex items-center justify-between gap-2">
+                            <span id="detectedName" class="font-bold text-cwt-800 text-sm sm:text-base truncate">Producto</span>
+                            <span id="detectedBadge" class="text-[11px] px-2 py-0.5 rounded-full font-bold bg-emerald-100 text-emerald-800 shrink-0">Stock OK</span>
                         </div>
-                        <div class="grid grid-cols-2 gap-2 text-xs text-slate-600 bg-white p-2.5 rounded-xl border">
+                        <div class="grid grid-cols-2 gap-2 text-xs text-slate-600 bg-white p-2 rounded-xl border">
                             <div>Stock Actual: <strong id="detectedStock" class="text-slate-900 font-bold">0</strong></div>
                             <div>Punto Reorden: <strong id="detectedROP" class="text-slate-900 font-bold">0</strong></div>
                         </div>
-                        <div id="detectedWhWarning" class="hidden text-xs bg-amber-50 text-amber-900 p-3 rounded-xl border border-amber-200 font-medium space-y-1.5">
+                        <div id="detectedWhWarning" class="hidden text-xs bg-amber-50 text-amber-900 p-2.5 rounded-xl border border-amber-200 font-medium space-y-1.5">
                             <div class="flex items-start gap-1.5">
-                                <i class="fa-solid fa-triangle-exclamation text-amber-600 mt-0.5"></i>
+                                <i class="fa-solid fa-triangle-exclamation text-amber-600 mt-0.5 shrink-0"></i>
                                 <div>
-                                    <span id="detectedWhText" class="font-bold"></span>
-                                    <p class="text-[11px] text-amber-700 font-normal">Este producto pertenece exclusivamente a esa zona y no se puede mover de almacén.</p>
+                                    <span id="detectedWhText" class="font-bold block"></span>
+                                    <p class="text-[10px] text-amber-700 font-normal">Este producto pertenece exclusivamente a esa zona.</p>
                                 </div>
                             </div>
-                            <button onclick="autoSwitchViewWh()" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-1.5 px-3 rounded-lg text-xs transition flex items-center justify-center gap-1.5 mt-1 shadow-sm">
-                                <i class="fa-solid fa-eye"></i> <span>Cambiar vista al Almacén de este producto</span>
+                            <button onclick="autoSwitchViewWh()" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-1.5 px-2.5 rounded-lg text-xs transition flex items-center justify-center gap-1 shadow-sm">
+                                <i class="fa-solid fa-eye"></i> <span>Cambiar vista a este Almacén</span>
                             </button>
                         </div>
                     </div>
 
-                    <!-- CANTIDAD DE LOTE Y FECHA DE REGISTRO CON UNIDAD DINÁMICA DE MEDIDA -->
-                    <div class="grid grid-cols-2 gap-3 items-center pt-1">
+                    <!-- CANTIDAD DE LOTE Y FECHA DE REGISTRO CON UNIDAD DINÁMICA -->
+                    <div class="grid grid-cols-2 gap-2.5 items-center pt-1">
                         <div>
-                            <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1">
-                                Cantidad de Lote <span id="qtyUnitBadge" class="text-cwt-800 font-extrabold uppercase"></span>
+                            <label class="block text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase mb-1">
+                                Cantidad <span id="qtyUnitBadge" class="text-cwt-800 font-extrabold uppercase"></span>
                             </label>
-                            <input type="number" id="qtyInput" value="1" min="1" class="w-full px-3 py-2.5 border-2 border-slate-200 rounded-xl text-center font-bold text-lg focus:border-cwt-800 focus:outline-none">
+                            <input type="number" id="qtyInput" value="1" min="1" class="w-full px-2 py-2.5 border-2 border-slate-200 rounded-xl text-center font-bold text-base sm:text-lg focus:border-cwt-800 focus:outline-none">
                         </div>
                         <div>
-                            <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1">Fecha de Registro</label>
-                            <input type="date" id="recordDateInput" class="w-full px-2 py-2.5 border-2 border-slate-200 rounded-xl text-center font-semibold text-xs text-slate-700 focus:border-cwt-800 focus:outline-none">
+                            <label class="block text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase mb-1">Fecha Registro</label>
+                            <input type="date" id="recordDateInput" class="w-full px-1.5 py-2.5 border-2 border-slate-200 rounded-xl text-center font-semibold text-xs text-slate-700 focus:border-cwt-800 focus:outline-none">
                         </div>
                     </div>
 
-                    <!-- BOTONES TÁCTILES PRINCIPALES -->
-                    <div class="grid grid-cols-2 gap-3 pt-2">
-                        <button onclick="registerMovement('ENTRADA')" class="bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white py-4 rounded-2xl font-black text-sm shadow-lg shadow-emerald-600/20 transition flex flex-col items-center justify-center gap-1">
-                            <i class="fa-solid fa-circle-plus text-2xl"></i>
+                    <!-- BOTONES TÁCTILES PRINCIPALES GRANDES -->
+                    <div class="grid grid-cols-2 gap-2.5 pt-1">
+                        <button onclick="registerMovement('ENTRADA')" class="bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white py-3.5 rounded-2xl font-black text-xs sm:text-sm shadow-md transition flex flex-col items-center justify-center gap-1">
+                            <i class="fa-solid fa-circle-plus text-xl sm:text-2xl"></i>
                             <span>[+] ENTRADA</span>
                         </button>
-                        <button onclick="registerMovement('SALIDA')" class="bg-rose-600 hover:bg-rose-700 active:scale-95 text-white py-4 rounded-2xl font-black text-sm shadow-lg shadow-rose-600/20 transition flex flex-col items-center justify-center gap-1">
-                            <i class="fa-solid fa-circle-minus text-2xl"></i>
+                        <button onclick="registerMovement('SALIDA')" class="bg-rose-600 hover:bg-rose-700 active:scale-95 text-white py-3.5 rounded-2xl font-black text-xs sm:text-sm shadow-md transition flex flex-col items-center justify-center gap-1">
+                            <i class="fa-solid fa-circle-minus text-xl sm:text-2xl"></i>
                             <span>[-] SALIDA</span>
                         </button>
                     </div>
@@ -300,69 +301,73 @@
 
             </section>
 
-            <!-- RIGHT PANEL: MAESTRO DE PRODUCTOS Y KARDEX -->
+            <!-- RIGHT PANEL: MAESTRO DE PRODUCTOS Y KARDEX (COMPACTO Y SCROLLABLE) -->
             <section class="lg:col-span-7 space-y-4">
                 
                 <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col h-full">
                     <!-- TABS HEADER -->
-                    <div class="bg-slate-100 p-2 flex gap-2 border-b border-slate-200">
-                        <button id="tabBtnInventory" onclick="switchTab('inventory')" class="flex-1 py-2.5 font-bold text-xs uppercase tracking-wider rounded-xl bg-white shadow text-cwt-800 transition">
-                            <i class="fa-solid fa-boxes-packing mr-1.5"></i> Inventario Maestro
+                    <div class="bg-slate-100 p-1.5 flex gap-1.5 border-b border-slate-200">
+                        <button id="tabBtnInventory" onclick="switchTab('inventory')" class="flex-1 py-2 font-bold text-[11px] sm:text-xs uppercase tracking-wider rounded-xl bg-white shadow text-cwt-800 transition">
+                            <i class="fa-solid fa-boxes-packing mr-1"></i> Inventario
                         </button>
-                        <button id="tabBtnKardex" onclick="switchTab('kardex')" class="flex-1 py-2.5 font-bold text-xs uppercase tracking-wider rounded-xl text-slate-500 hover:bg-white/50 transition">
-                            <i class="fa-solid fa-calendar-days mr-1.5"></i> Kardex con Fechas
+                        <button id="tabBtnKardex" onclick="switchTab('kardex')" class="flex-1 py-2 font-bold text-[11px] sm:text-xs uppercase tracking-wider rounded-xl text-slate-500 hover:bg-white/50 transition">
+                            <i class="fa-solid fa-calendar-days mr-1"></i> Kardex Histórico
                         </button>
                     </div>
 
-                    <!-- SEARCH BAR & DATE FILTER -->
-                    <div class="p-3 border-b border-slate-100 bg-slate-50/50 flex flex-wrap gap-2 items-center justify-between">
-                        <div class="relative flex-1 min-w-[200px]">
-                            <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
-                            <input type="text" id="searchInput" oninput="filterTables()" placeholder="Buscar por código o producto..." class="w-full pl-8 pr-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:border-cwt-800">
+                    <!-- SEARCH BAR & EXPORT BUTTON -->
+                    <div class="p-2.5 border-b border-slate-100 bg-slate-50/50 flex flex-wrap gap-2 items-center justify-between">
+                        <div class="relative flex-1 min-w-[140px]">
+                            <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2.5 text-slate-400 text-xs"></i>
+                            <input type="text" id="searchInput" oninput="filterTables()" placeholder="Buscar producto..." class="w-full pl-7 pr-2 py-1 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:border-cwt-800">
                         </div>
-                        <button onclick="exportKardexCSV()" class="text-xs bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-3 py-1.5 rounded-lg transition flex items-center gap-1.5 shadow-sm">
-                            <i class="fa-solid fa-file-excel"></i> <span>Exportar a Excel (.xlsx)</span>
+                        <button onclick="exportKardexCSV()" class="text-xs bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-2.5 py-1.5 rounded-lg transition flex items-center gap-1 shadow-sm shrink-0">
+                            <i class="fa-solid fa-file-excel"></i> <span>Excel (.xlsx)</span>
                         </button>
                     </div>
 
-                    <!-- INVENTORY TAB -->
-                    <div id="tabInventory" class="p-4 flex-1 overflow-x-auto">
-                        <table class="w-full text-left text-xs">
-                            <thead>
-                                <tr class="text-[10px] uppercase text-slate-400 border-b border-slate-200">
-                                    <th class="pb-2">Código</th>
-                                    <th class="pb-2">Producto / Bien</th>
-                                    <th class="pb-2 text-center">Unidad</th>
-                                    <th class="pb-2 text-center">Stock</th>
-                                    <th class="pb-2 text-center">Reorden</th>
-                                    <th class="pb-2 text-center">Estado</th>
-                                    <th class="pb-2 text-right">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody id="inventoryBody" class="divide-y divide-slate-100 font-medium">
-                                <!-- Dynamic rows -->
-                            </tbody>
-                        </table>
+                    <!-- INVENTORY TAB CON TABLA RESPONSIVA Y SCROLL HORIZONTAL -->
+                    <div id="tabInventory" class="p-2.5 sm:p-4 flex-1 overflow-x-auto max-w-full">
+                        <div class="min-w-[500px]">
+                            <table class="w-full text-left text-xs">
+                                <thead>
+                                    <tr class="text-[10px] uppercase text-slate-400 border-b border-slate-200">
+                                        <th class="pb-2">Cód</th>
+                                        <th class="pb-2">Producto / Bien</th>
+                                        <th class="pb-2 text-center">Unid</th>
+                                        <th class="pb-2 text-center">Stock</th>
+                                        <th class="pb-2 text-center">Reorden</th>
+                                        <th class="pb-2 text-center">Estado</th>
+                                        <th class="pb-2 text-right">Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="inventoryBody" class="divide-y divide-slate-100 font-medium">
+                                    <!-- Dynamic rows -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
-                    <!-- KARDEX TAB WITH EXPLICIT DATES AND ADMIN ACTIONS -->
-                    <div id="tabKardex" class="p-4 flex-1 overflow-x-auto hidden">
-                        <table class="w-full text-left text-xs">
-                            <thead>
-                                <tr class="text-[10px] uppercase text-slate-400 border-b border-slate-200">
-                                    <th class="pb-2">Fecha y Hora</th>
-                                    <th class="pb-2">Operador</th>
-                                    <th class="pb-2">Tipo</th>
-                                    <th class="pb-2">Código - Producto</th>
-                                    <th class="pb-2 text-center">Cant.</th>
-                                    <th class="pb-2 text-center">Stock Result.</th>
-                                    <th id="kardexActionsHeader" class="pb-2 text-right">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody id="kardexBody" class="divide-y divide-slate-100">
-                                <!-- Dynamic rows -->
-                            </tbody>
-                        </table>
+                    <!-- KARDEX TAB CON SCROLL HORIZONTAL RESPONSIVO -->
+                    <div id="tabKardex" class="p-2.5 sm:p-4 flex-1 overflow-x-auto max-w-full hidden">
+                        <div class="min-w-[550px]">
+                            <table class="w-full text-left text-xs">
+                                <thead>
+                                    <tr class="text-[10px] uppercase text-slate-400 border-b border-slate-200">
+                                        <th class="pb-2">Fecha</th>
+                                        <th class="pb-2">Operador</th>
+                                        <th class="pb-2">Tipo</th>
+                                        <th class="pb-2">Producto</th>
+                                        <th class="pb-2 text-center">Cant</th>
+                                        <th class="pb-2 text-center">Result</th>
+                                        <th id="kardexActionsHeader" class="pb-2 text-right">Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="kardexBody" class="divide-y divide-slate-100">
+                                    <!-- Dynamic rows -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
@@ -371,195 +376,186 @@
         </main>
 
         <!-- FOOTER CORPORATIVO -->
-        <footer class="bg-cwt-800 text-white text-center py-4 text-xs font-semibold tracking-wider mt-auto border-t border-blue-900">
+        <footer class="bg-cwt-800 text-white text-center py-3 text-[10px] sm:text-xs font-semibold tracking-wider mt-auto border-t border-blue-900 w-full">
             CLEAN WATER TECHNOLOGY - TODOS LOS DERECHOS RESERVADOS
         </footer>
 
     </div>
 
-    <!-- MODAL: GESTIÓN DE PRODUCTO Y CÓDIGO DE BARRAS -->
-    <div id="productModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-3xl shadow-2xl p-6 max-w-lg w-full border-t-8 border-cwt-800">
-            <div class="flex items-center justify-between pb-3 border-b mb-4">
-                <h3 id="modalTitle" class="font-bold text-base text-cwt-800">Registrar Nuevo Producto & Código</h3>
-                <button onclick="closeProductModal()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+    <!-- MODALES -->
+    <div id="productModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 hidden">
+        <div class="bg-white rounded-3xl shadow-2xl p-5 max-w-lg w-full border-t-8 border-cwt-800 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between pb-2 border-b mb-3">
+                <h3 id="modalTitle" class="font-bold text-sm sm:text-base text-cwt-800">Registrar Nuevo Producto</h3>
+                <button onclick="closeProductModal()" class="text-slate-400 hover:text-slate-600 p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
             
-            <form id="productForm" onsubmit="saveProduct(event)" class="space-y-4">
+            <form id="productForm" onsubmit="saveProduct(event)" class="space-y-3">
                 <input type="hidden" id="editIndex" value="-1">
                 
-                <div class="grid grid-cols-2 gap-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                         <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Almacén Destino</label>
-                        <select id="mWarehouse" class="w-full border rounded-xl p-2.5 text-xs font-semibold">
+                        <select id="mWarehouse" class="w-full border rounded-xl p-2 text-xs font-semibold">
                             <option value="quimicos_domestico">ALMACEN DE QUÍMICOS - ZONA C. DOMÉSTICO</option>
                             <option value="quimicos_elevador2">ALMACÉN DE QUÍMICOS - ZONA ELEVADOR 2</option>
                             <option value="materiales_elevador2">ALMACEN DE MATERIALES - ZONA ELEVADOR 2</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Código Único (Barras/QR)</label>
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Código Único</label>
                         <div class="flex gap-1">
-                            <input type="text" id="mBarcode" required oninput="previewBarcode()" class="w-full border rounded-xl p-2.5 text-xs font-mono font-bold" placeholder="ej. 1001">
-                            <button type="button" onclick="autoGenerateCode()" title="Generar Código Automático" class="px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
+                            <input type="text" id="mBarcode" required oninput="previewBarcode()" class="w-full border rounded-xl p-2 text-xs font-mono font-bold" placeholder="ej. 1001">
+                            <button type="button" onclick="autoGenerateCode()" class="px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
                         </div>
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Nombre Completo del Bien / Producto</label>
-                    <input type="text" id="mName" required class="w-full border rounded-xl p-2.5 text-xs font-medium" placeholder="ej. Hipoclorito de Sodio 12%">
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Nombre Completo del Bien</label>
+                    <input type="text" id="mName" required class="w-full border rounded-xl p-2 text-xs font-medium" placeholder="ej. Hipoclorito de Sodio 12%">
                 </div>
 
-                <div class="grid grid-cols-3 gap-3">
+                <div class="grid grid-cols-3 gap-2">
                     <div>
-                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Unidad Medida</label>
-                        <input type="text" id="mUnit" placeholder="Litros / Kg / Unid" required class="w-full border rounded-xl p-2.5 text-xs">
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Unidad</label>
+                        <input type="text" id="mUnit" placeholder="Litros / Kg" required class="w-full border rounded-xl p-2 text-xs">
                     </div>
                     <div>
-                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Stock Inicial</label>
-                        <input type="number" id="mStock" value="0" min="0" required class="w-full border rounded-xl p-2.5 text-xs font-bold">
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Stock Inic</label>
+                        <input type="number" id="mStock" value="0" min="0" required class="w-full border rounded-xl p-2 text-xs font-bold">
                     </div>
                     <div>
-                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Punto Reorden</label>
-                        <input type="number" id="mROP" value="10" min="1" required class="w-full border rounded-xl p-2.5 text-xs font-bold">
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Reorden</label>
+                        <input type="number" id="mROP" value="10" min="1" required class="w-full border rounded-xl p-2 text-xs font-bold">
                     </div>
                 </div>
 
-                <!-- PREVISUALIZACIÓN DE CÓDIGO DE BARRAS GENERADO -->
-                <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200 text-center">
-                    <span class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Vista Previa de Código de Barras</span>
-                    <svg id="barcodePreview" class="mx-auto max-h-16"></svg>
+                <div class="bg-slate-50 p-2 rounded-xl border border-slate-200 text-center">
+                    <span class="text-[9px] uppercase font-bold text-slate-400 block mb-1">Vista Previa Código de Barras</span>
+                    <svg id="barcodePreview" class="mx-auto max-h-12"></svg>
                 </div>
 
                 <div class="pt-2 flex justify-end gap-2">
-                    <button type="button" onclick="closeProductModal()" class="px-4 py-2 border rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100">Cancelar</button>
-                    <button type="submit" class="px-5 py-2 bg-cwt-800 text-white rounded-xl text-xs font-bold hover:bg-cwt-900 shadow-md">Guardar en Base de Datos</button>
+                    <button type="button" onclick="closeProductModal()" class="px-3 py-1.5 border rounded-xl text-xs font-bold text-slate-600">Cancelar</button>
+                    <button type="submit" class="px-4 py-1.5 bg-cwt-800 text-white rounded-xl text-xs font-bold shadow-md">Guardar</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- MODAL: EDITAR REGISTRO DEL KARDEX -->
-    <div id="kardexModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-3xl shadow-2xl p-6 max-w-md w-full border-t-8 border-cwt-800">
-            <div class="flex items-center justify-between pb-3 border-b mb-4">
-                <h3 class="font-bold text-base text-cwt-800">Editar Registro del Kardex</h3>
-                <button onclick="closeKardexModal()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+    <!-- MODAL EDITAR KARDEX -->
+    <div id="kardexModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 hidden">
+        <div class="bg-white rounded-3xl shadow-2xl p-5 max-w-md w-full border-t-8 border-cwt-800">
+            <div class="flex items-center justify-between pb-2 border-b mb-3">
+                <h3 class="font-bold text-sm text-cwt-800">Editar Registro del Kardex</h3>
+                <button onclick="closeKardexModal()" class="text-slate-400 hover:text-slate-600 p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
-            <form id="kardexForm" onsubmit="saveKardexEntry(event)" class="space-y-4">
+            <form id="kardexForm" onsubmit="saveKardexEntry(event)" class="space-y-3">
                 <input type="hidden" id="editKardexIndex" value="-1">
                 <div>
                     <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Fecha y Hora</label>
-                    <input type="text" id="editKardexDate" required class="w-full border rounded-xl p-2.5 text-xs font-semibold">
+                    <input type="text" id="editKardexDate" required class="w-full border rounded-xl p-2 text-xs font-semibold">
                 </div>
                 <div>
                     <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Nombre del Operador</label>
-                    <input type="text" id="editKardexUser" required class="w-full border rounded-xl p-2.5 text-xs font-semibold">
+                    <input type="text" id="editKardexUser" required class="w-full border rounded-xl p-2 text-xs font-semibold">
                 </div>
-                <div class="grid grid-cols-2 gap-3">
+                <div class="grid grid-cols-2 gap-2">
                     <div>
                         <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Tipo Movimiento</label>
-                        <select id="editKardexType" class="w-full border rounded-xl p-2.5 text-xs font-semibold">
+                        <select id="editKardexType" class="w-full border rounded-xl p-2 text-xs font-semibold">
                             <option value="ENTRADA">ENTRADA</option>
                             <option value="SALIDA">SALIDA</option>
                         </select>
                     </div>
                     <div>
                         <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Cantidad</label>
-                        <input type="number" id="editKardexQty" min="1" required class="w-full border rounded-xl p-2.5 text-xs font-bold">
+                        <input type="number" id="editKardexQty" min="1" required class="w-full border rounded-xl p-2 text-xs font-bold">
                     </div>
                 </div>
                 <div class="pt-2 flex justify-end gap-2">
-                    <button type="button" onclick="closeKardexModal()" class="px-4 py-2 border rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100">Cancelar</button>
-                    <button type="submit" class="px-5 py-2 bg-cwt-800 text-white rounded-xl text-xs font-bold hover:bg-cwt-900 shadow-md">Guardar Cambios</button>
+                    <button type="button" onclick="closeKardexModal()" class="px-3 py-1.5 border rounded-xl text-xs font-bold text-slate-600">Cancelar</button>
+                    <button type="submit" class="px-4 py-1.5 bg-cwt-800 text-white rounded-xl text-xs font-bold shadow-md">Guardar</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- MODAL: GESTIONAR CUENTAS ADMINISTRATIVAS -->
-    <div id="adminAccountsModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-3xl shadow-2xl p-6 max-w-lg w-full border-t-8 border-cwt-800 space-y-4">
-            <div class="flex items-center justify-between pb-3 border-b">
-                <h3 class="font-bold text-base text-cwt-800"><i class="fa-solid fa-users-gear mr-2"></i>Gestionar Cuentas de Administrador</h3>
-                <button onclick="closeAdminAccountsModal()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+    <!-- MODAL GESTIONAR ADMINS -->
+    <div id="adminAccountsModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 hidden">
+        <div class="bg-white rounded-3xl shadow-2xl p-5 max-w-lg w-full border-t-8 border-cwt-800 space-y-3">
+            <div class="flex items-center justify-between pb-2 border-b">
+                <h3 class="font-bold text-sm text-cwt-800"><i class="fa-solid fa-users-gear mr-1.5"></i>Gestionar Administradores</h3>
+                <button onclick="closeAdminAccountsModal()" class="text-slate-400 hover:text-slate-600 p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
 
-            <!-- TABLA DE CUENTAS ACTUALES -->
-            <div class="space-y-2">
-                <span class="text-xs font-bold text-slate-500 uppercase">Cuentas Registradas</span>
-                <div class="max-h-40 overflow-y-auto border rounded-xl divide-y bg-slate-50">
+            <div class="space-y-1.5">
+                <span class="text-[10px] font-bold text-slate-500 uppercase">Cuentas Registradas</span>
+                <div class="max-h-36 overflow-y-auto border rounded-xl divide-y bg-slate-50">
                     <table class="w-full text-xs text-left">
-                        <thead class="bg-slate-100 text-[10px] text-slate-500 uppercase">
+                        <thead class="bg-slate-100 text-[9px] text-slate-500 uppercase">
                             <tr>
-                                <th class="p-2">Usuario</th>
-                                <th class="p-2">Contraseña</th>
-                                <th class="p-2 text-right">Acción</th>
+                                <th class="p-1.5">Usuario</th>
+                                <th class="p-1.5">Clave</th>
+                                <th class="p-1.5 text-right">Acción</th>
                             </tr>
                         </thead>
                         <tbody id="adminAccountsListBody" class="divide-y">
-                            <!-- Dynamic rows -->
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- FORMULARIO AGREGAR NUEVA CUENTA -->
-            <form onsubmit="addNewAdminAccount(event)" class="space-y-3 pt-2 border-t">
-                <span class="text-xs font-bold text-cwt-800 uppercase block">Agregar Nuevo Administrador</span>
-                <div class="grid grid-cols-2 gap-3">
+            <form onsubmit="addNewAdminAccount(event)" class="space-y-2 pt-2 border-t">
+                <span class="text-xs font-bold text-cwt-800 uppercase block">Agregar Administrador</span>
+                <div class="grid grid-cols-2 gap-2">
                     <div>
-                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Nombre / Usuario</label>
-                        <input type="text" id="newAdminUser" required placeholder="Ej. MARIO SILVA" class="w-full border rounded-xl p-2.5 text-xs uppercase font-semibold">
+                        <input type="text" id="newAdminUser" required placeholder="Usuario" class="w-full border rounded-xl p-2 text-xs uppercase font-semibold">
                     </div>
                     <div>
-                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Contraseña</label>
-                        <input type="password" id="newAdminPass" required placeholder="••••••••" class="w-full border rounded-xl p-2.5 text-xs font-semibold">
+                        <input type="password" id="newAdminPass" required placeholder="Contraseña" class="w-full border rounded-xl p-2 text-xs font-semibold">
                     </div>
                 </div>
-                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-xs transition flex items-center justify-center gap-1.5 shadow">
-                    <i class="fa-solid fa-user-plus"></i> <span>Registrar Nuevo Administrador</span>
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 rounded-xl text-xs transition flex items-center justify-center gap-1 shadow">
+                    <i class="fa-solid fa-user-plus text-xs"></i> <span>Registrar Administrador</span>
                 </button>
             </form>
 
-            <div class="flex justify-end pt-2">
-                <button type="button" onclick="closeAdminAccountsModal()" class="px-4 py-2 border rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100">Cerrar</button>
+            <div class="flex justify-end pt-1">
+                <button type="button" onclick="closeAdminAccountsModal()" class="px-3 py-1.5 border rounded-xl text-xs font-bold text-slate-600">Cerrar</button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL IMPRESIÓN DE ETIQUETA DE BARRAS CON LOGO CWT -->
-    <div id="printModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-3xl p-6 max-w-sm w-full text-center space-y-4">
-            <h3 class="font-bold text-sm text-cwt-800 uppercase">Etiqueta Oficial CWT</h3>
-            <div id="printableBarcodeArea" class="bg-white p-5 border-2 border-cwt-800 rounded-2xl space-y-2">
-                <div class="flex items-center justify-center gap-2 border-b border-slate-200 pb-2">
-                    <svg class="w-6 h-6 text-cwt-800" viewBox="0 0 100 100" fill="currentColor">
+    <!-- MODAL IMPRESIÓN ETIQUETA -->
+    <div id="printModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 hidden">
+        <div class="bg-white rounded-3xl p-5 max-w-sm w-full text-center space-y-3">
+            <h3 class="font-bold text-xs text-cwt-800 uppercase">Etiqueta Oficial CWT</h3>
+            <div id="printableBarcodeArea" class="bg-white p-4 border-2 border-cwt-800 rounded-2xl space-y-1.5">
+                <div class="flex items-center justify-center gap-1.5 border-b border-slate-200 pb-1.5">
+                    <svg class="w-5 h-5 text-cwt-800" viewBox="0 0 100 100" fill="currentColor">
                         <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="8"/>
                         <path d="M50 5 A45 45 0 0 1 50 95 A45 45 0 0 1 50 5" fill="none" stroke="currentColor" stroke-width="4"/>
                         <path d="M5 50 A45 45 0 0 1 95 50 A45 45 0 0 1 5 50" fill="none" stroke="currentColor" stroke-width="4"/>
                     </svg>
-                    <span class="font-black text-lg text-cwt-800 tracking-tighter">CWT</span>
-                    <span class="text-[9px] font-bold text-slate-500 uppercase">Clean Water Tech</span>
+                    <span class="font-black text-base text-cwt-800 tracking-tighter">CWT</span>
                 </div>
-                <div id="printProductName" class="font-extrabold text-sm text-slate-900">Producto</div>
+                <div id="printProductName" class="font-extrabold text-xs text-slate-900 truncate">Producto</div>
                 <svg id="printBarcodeSvg" class="mx-auto"></svg>
-                <div class="text-[9px] text-slate-400 font-mono">Control de Inventario Institucional</div>
             </div>
             <div class="flex gap-2">
-                <button onclick="closePrintModal()" class="flex-1 py-2 border rounded-xl text-xs font-bold text-slate-600">Cerrar</button>
-                <button onclick="window.print()" class="flex-1 py-2 bg-cwt-800 text-white rounded-xl text-xs font-bold"><i class="fa-solid fa-print mr-1"></i> Imprimir</button>
+                <button onclick="closePrintModal()" class="flex-1 py-1.5 border rounded-xl text-xs font-bold text-slate-600">Cerrar</button>
+                <button onclick="window.print()" class="flex-1 py-1.5 bg-cwt-800 text-white rounded-xl text-xs font-bold"><i class="fa-solid fa-print mr-1"></i> Imprimir</button>
             </div>
         </div>
     </div>
 
     <!-- TOAST NOTIFICATIONS -->
-    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
+    <div id="toastContainer" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 max-w-xs w-full pointer-events-none"></div>
 
     <!-- SCRIPT LOGIC -->
     <script>
-        // --- ADMIN CREDENTIALS (GESTIONABLES & PERSISTENTES) ---
         const DEFAULT_ADMIN_ACCOUNTS = [
             { user: "FABRIZIO TERRONES", pass: "70799159" },
             { user: "JOSE RAMOS", pass: "40371247" }
@@ -567,7 +563,6 @@
 
         let adminAccounts = JSON.parse(localStorage.getItem('cwt_admin_accounts_v16')) || DEFAULT_ADMIN_ACCOUNTS;
 
-        // --- INITIAL SEED DATA ---
         const INITIAL_PRODUCTS = [
             { barcode: "1001", name: "Hipoclorito de Sodio", warehouse: "quimicos_domestico", unit: "Litros", stock: 2122, rop: 2683 },
             { barcode: "1002", name: "Soda Cáustica", warehouse: "quimicos_domestico", unit: "Kg", stock: 750, rop: 914 },
@@ -578,14 +573,12 @@
             { barcode: "3002", name: "Filtro de Arena M-1", warehouse: "materiales_elevador2", unit: "Unidades", stock: 15, rop: 5 }
         ];
 
-        // Seed Kardex with historic dates
         const INITIAL_KARDEX = [
             { date: "16/09/2026 08:30:00", user: "Juan Pérez", warehouse: "quimicos_domestico", barcode: "1001", name: "Hipoclorito de Sodio", type: "ENTRADA", qty: 500, unit: "Litros", resultStock: 2122 },
             { date: "16/09/2026 14:15:20", user: "Juan Pérez", warehouse: "quimicos_domestico", barcode: "1002", name: "Soda Cáustica", type: "SALIDA", qty: 100, unit: "Kg", resultStock: 750 },
             { date: "17/09/2026 09:10:05", user: "Carlos López", warehouse: "quimicos_elevador2", barcode: "2001", name: "Polímero Cátionico", type: "SALIDA", qty: 50, unit: "Litros", resultStock: 350 }
         ];
 
-        // State Variables
         let products = JSON.parse(localStorage.getItem('cwt_products_v16')) || INITIAL_PRODUCTS;
         let kardex = JSON.parse(localStorage.getItem('cwt_kardex_v16')) || INITIAL_KARDEX;
         let currentUser = null;
@@ -594,7 +587,6 @@
         let cameraRunning = false;
         let detectedProductWh = null;
 
-        // Sound Feedback using Web Audio API
         function playScanBeep() {
             try {
                 const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -610,16 +602,13 @@
             } catch(e) {}
         }
 
-        // Initialize record date input to today YYYY-MM-DD
         document.getElementById('recordDateInput').value = new Date().toISOString().split('T')[0];
 
-        // Live Clock
         setInterval(() => {
             const now = new Date();
             document.getElementById('liveClock').innerText = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
         }, 1000);
 
-        // LOGIN TABS
         function setLoginRole(role) {
             const opBtn = document.getElementById('tabOpBtn');
             const adminBtn = document.getElementById('tabAdminBtn');
@@ -627,13 +616,13 @@
             const adminForm = document.getElementById('adminLoginForm');
 
             if (role === 'OPERADOR') {
-                opBtn.className = "flex-1 py-3 text-xs font-bold uppercase tracking-wider text-cwt-800 border-b-2 border-cwt-800 bg-white transition";
-                adminBtn.className = "flex-1 py-3 text-xs font-bold uppercase tracking-wider text-slate-400 hover:text-slate-600 transition";
+                opBtn.className = "flex-1 py-3 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-cwt-800 border-b-2 border-cwt-800 bg-white transition";
+                adminBtn.className = "flex-1 py-3 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 hover:text-slate-600 transition";
                 opForm.classList.remove('hidden');
                 adminForm.classList.add('hidden');
             } else {
-                adminBtn.className = "flex-1 py-3 text-xs font-bold uppercase tracking-wider text-cwt-800 border-b-2 border-cwt-800 bg-white transition";
-                opBtn.className = "flex-1 py-3 text-xs font-bold uppercase tracking-wider text-slate-400 hover:text-slate-600 transition";
+                adminBtn.className = "flex-1 py-3 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-cwt-800 border-b-2 border-cwt-800 bg-white transition";
+                opBtn.className = "flex-1 py-3 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 hover:text-slate-600 transition";
                 adminForm.classList.remove('hidden');
                 opForm.classList.add('hidden');
             }
@@ -667,9 +656,9 @@
                 currentUser = match.user;
                 currentRole = 'ADMIN';
                 startSession();
-                showToast(`Sesión de Administrador iniciada: ${match.user}`, 'success');
+                showToast(`Sesión de Admin iniciada: ${match.user}`, 'success');
             } else {
-                showToast('Usuario o contraseña de administrador incorrectos', 'error');
+                showToast('Usuario o contraseña incorrectos', 'error');
             }
         }
 
@@ -681,14 +670,23 @@
             document.getElementById('sessionUserLabel').innerText = `${currentRole === 'ADMIN' ? 'Admin' : 'Op'}: ${currentUser}`;
             document.getElementById('sessionRoleBadge').innerText = currentRole;
 
+            const statsContainer = document.getElementById('dashboardStats');
+
             if(currentRole === 'ADMIN') {
                 document.getElementById('adminAddProductBtn').classList.remove('hidden');
                 document.getElementById('adminAddProductBtn').classList.add('flex');
                 document.getElementById('adminManageUsersBtn').classList.remove('hidden');
                 document.getElementById('adminManageUsersBtn').classList.add('flex');
+                
+                // Muestra estadísticas completas al Administrador
+                statsContainer.classList.remove('hidden');
             } else {
                 document.getElementById('adminAddProductBtn').classList.add('hidden');
                 document.getElementById('adminManageUsersBtn').classList.add('hidden');
+                
+                // OCULTA TARJETAS PESADAS DE ESTADÍSTICAS PARA EL OPERADOR EN MÓVIL (MINIMALISTA)
+                statsContainer.classList.add('hidden');
+                statsContainer.classList.add('sm:block'); // Solo visible en pantallas grandes si se requiere
             }
 
             initApp();
@@ -701,7 +699,6 @@
             currentUser = null;
         }
 
-        // --- APP LOGIC ---
         function initApp() {
             renderInventory();
             renderKardex();
@@ -741,43 +738,43 @@
             const filtered = products.filter(p => p.warehouse === currentWh);
 
             if(filtered.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" class="text-center py-6 text-slate-400">No hay productos registrados en este almacén.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="7" class="text-center py-6 text-slate-400">Sin productos en este almacén.</td></tr>`;
                 return;
             }
 
             filtered.forEach((p, idx) => {
-                let statusBadge = '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">✅ OK</span>';
+                let statusBadge = '<span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-emerald-100 text-emerald-800">✅ OK</span>';
                 let rowBg = '';
 
                 if (p.stock <= p.rop) {
-                    statusBadge = '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-100 text-rose-800 animate-pulse">⚠️ PEDIR YA</span>';
+                    statusBadge = '<span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-rose-100 text-rose-800 animate-pulse">⚠️ REABASTECER</span>';
                     rowBg = 'bg-rose-50/50';
                 } else if (p.stock <= p.rop * 1.15) {
-                    statusBadge = '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800">⚡ CERCA</span>';
+                    statusBadge = '<span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-100 text-amber-800">⚡ CERCA</span>';
                 }
 
                 let adminActions = '';
                 if(currentRole === 'ADMIN') {
                     adminActions = `
-                        <button onclick="openPrintModal('${p.barcode}', '${p.name}')" title="Imprimir Código CWT" class="text-slate-400 hover:text-cwt-800 p-1"><i class="fa-solid fa-barcode"></i></button>
-                        <button onclick="editProduct('${p.barcode}')" title="Editar Producto" class="text-slate-400 hover:text-blue-600 p-1"><i class="fa-solid fa-pen"></i></button>
-                        <button onclick="deleteProduct('${p.barcode}')" title="Eliminar" class="text-slate-400 hover:text-rose-600 p-1"><i class="fa-solid fa-trash"></i></button>
+                        <button onclick="openPrintModal('${p.barcode}', '${p.name}')" title="Imprimir" class="text-slate-400 hover:text-cwt-800 p-0.5"><i class="fa-solid fa-barcode"></i></button>
+                        <button onclick="editProduct('${p.barcode}')" title="Editar" class="text-slate-400 hover:text-blue-600 p-0.5"><i class="fa-solid fa-pen"></i></button>
+                        <button onclick="deleteProduct('${p.barcode}')" title="Eliminar" class="text-slate-400 hover:text-rose-600 p-0.5"><i class="fa-solid fa-trash"></i></button>
                     `;
                 } else {
                     adminActions = `
-                        <button onclick="openPrintModal('${p.barcode}', '${p.name}')" title="Imprimir Código" class="text-slate-400 hover:text-cwt-800 p-1"><i class="fa-solid fa-barcode"></i></button>
+                        <button onclick="openPrintModal('${p.barcode}', '${p.name}')" title="Imprimir" class="text-slate-400 hover:text-cwt-800 p-0.5"><i class="fa-solid fa-barcode"></i></button>
                     `;
                 }
 
                 tbody.innerHTML += `
                     <tr class="${rowBg} hover:bg-slate-50 transition">
-                        <td class="py-2.5 font-mono font-bold text-cwt-800">${p.barcode}</td>
-                        <td class="py-2.5 font-bold">${p.name}</td>
-                        <td class="py-2.5 text-center text-slate-500">${p.unit}</td>
-                        <td class="py-2.5 text-center font-black text-sm text-slate-800">${p.stock}</td>
-                        <td class="py-2.5 text-center font-bold text-slate-400">${p.rop}</td>
-                        <td class="py-2.5 text-center">${statusBadge}</td>
-                        <td class="py-2.5 text-right font-medium">${adminActions}</td>
+                        <td class="py-2 font-mono font-bold text-cwt-800">${p.barcode}</td>
+                        <td class="py-2 font-bold truncate max-w-[140px]">${p.name}</td>
+                        <td class="py-2 text-center text-slate-500">${p.unit}</td>
+                        <td class="py-2 text-center font-black text-xs sm:text-sm text-slate-800">${p.stock}</td>
+                        <td class="py-2 text-center font-bold text-slate-400">${p.rop}</td>
+                        <td class="py-2 text-center">${statusBadge}</td>
+                        <td class="py-2 text-right font-medium">${adminActions}</td>
                     </tr>
                 `;
             });
@@ -809,9 +806,9 @@
                 let adminKardexActions = '';
                 if(currentRole === 'ADMIN') {
                     adminKardexActions = `
-                        <td class="py-2.5 text-right font-medium">
-                            <button onclick="editKardexEntry(${realIndex})" title="Editar Registro" class="text-slate-400 hover:text-blue-600 p-1"><i class="fa-solid fa-pen"></i></button>
-                            <button onclick="deleteKardexEntry(${realIndex})" title="Borrar Registro" class="text-slate-400 hover:text-rose-600 p-1"><i class="fa-solid fa-trash"></i></button>
+                        <td class="py-2 text-right font-medium">
+                            <button onclick="editKardexEntry(${realIndex})" title="Editar" class="text-slate-400 hover:text-blue-600 p-0.5"><i class="fa-solid fa-pen"></i></button>
+                            <button onclick="deleteKardexEntry(${realIndex})" title="Borrar" class="text-slate-400 hover:text-rose-600 p-0.5"><i class="fa-solid fa-trash"></i></button>
                         </td>
                     `;
                 } else {
@@ -820,29 +817,28 @@
 
                 tbody.innerHTML += `
                     <tr class="hover:bg-slate-50 border-b border-slate-100">
-                        <td class="py-2.5 font-mono text-[11px] font-bold text-slate-600"><i class="fa-regular fa-calendar-check text-cwt-800 mr-1"></i>${k.date}</td>
-                        <td class="py-2.5 font-bold text-slate-700">${k.user}</td>
-                        <td class="py-2.5">${badge}</td>
-                        <td class="py-2.5 font-medium"><strong class="font-mono text-cwt-800">${k.barcode}</strong> - ${k.name}</td>
-                        <td class="py-2.5 text-center font-bold">${k.qty} ${k.unit}</td>
-                        <td class="py-2.5 text-center font-black text-slate-800">${k.resultStock}</td>
+                        <td class="py-2 font-mono text-[10px] sm:text-[11px] font-bold text-slate-600">${k.date}</td>
+                        <td class="py-2 font-bold text-slate-700 truncate max-w-[90px]">${k.user}</td>
+                        <td class="py-2">${badge}</td>
+                        <td class="py-2 font-medium truncate max-w-[130px]"><strong class="font-mono text-cwt-800">${k.barcode}</strong> - ${k.name}</td>
+                        <td class="py-2 text-center font-bold">${k.qty} ${k.unit}</td>
+                        <td class="py-2 text-center font-black text-slate-800">${k.resultStock}</td>
                         ${adminKardexActions}
                     </tr>
                 `;
             });
         }
 
-        // --- GESTIÓN DE EDICIÓN Y BORRADO EN EL KARDEX ---
         function deleteKardexEntry(index) {
             if(index < 0 || index >= kardex.length) return;
             const entry = kardex[index];
-            if(!confirm(`¿Estás seguro de eliminar el registro de ${entry.type} de ${entry.qty} ${entry.unit} de ${entry.name}?`)) return;
+            if(!confirm(`¿Eliminar registro de ${entry.type} de ${entry.qty} ${entry.unit} de ${entry.name}?`)) return;
 
             kardex.splice(index, 1);
             localStorage.setItem('cwt_kardex_v16', JSON.stringify(kardex));
             renderKardex();
             updateStats();
-            showToast('Registro eliminado del historial del Kardex', 'info');
+            showToast('Registro eliminado del Kardex', 'info');
         }
 
         function editKardexEntry(index) {
@@ -876,10 +872,9 @@
             renderKardex();
             updateStats();
             closeKardexModal();
-            showToast('Registro del Kardex actualizado con éxito', 'success');
+            showToast('Kardex actualizado', 'success');
         }
 
-        // --- GESTIÓN DE CUENTAS ADMINISTRATIVAS ---
         function openAdminAccountsModal() {
             renderAdminAccountsList();
             document.getElementById('adminAccountsModal').classList.remove('hidden');
@@ -894,16 +889,16 @@
             tbody.innerHTML = '';
 
             adminAccounts.forEach((acc, idx) => {
-                let deleteBtn = `<button onclick="deleteAdminAccount(${idx})" title="Eliminar Admin" class="text-slate-400 hover:text-rose-600 p-1"><i class="fa-solid fa-trash"></i></button>`;
+                let deleteBtn = `<button onclick="deleteAdminAccount(${idx})" title="Eliminar" class="text-slate-400 hover:text-rose-600 p-1"><i class="fa-solid fa-trash"></i></button>`;
                 if(adminAccounts.length <= 1) {
-                    deleteBtn = `<span class="text-[10px] text-slate-300 italic">Mínimo 1 admin</span>`;
+                    deleteBtn = `<span class="text-[9px] text-slate-300 italic">Mínimo 1</span>`;
                 }
 
                 tbody.innerHTML += `
                     <tr>
-                        <td class="p-2 font-bold text-cwt-800">${acc.user}</td>
-                        <td class="p-2 font-mono text-slate-600">••••••••</td>
-                        <td class="p-2 text-right">${deleteBtn}</td>
+                        <td class="p-1.5 font-bold text-cwt-800">${acc.user}</td>
+                        <td class="p-1.5 font-mono text-slate-600">••••••••</td>
+                        <td class="p-1.5 text-right">${deleteBtn}</td>
                     </tr>
                 `;
             });
@@ -915,12 +910,12 @@
             const newPass = document.getElementById('newAdminPass').value.trim();
 
             if(!newUser || !newPass) {
-                showToast('Por favor completa usuario y contraseña', 'warning');
+                showToast('Completa usuario y contraseña', 'warning');
                 return;
             }
 
             if(adminAccounts.some(a => a.user.toUpperCase() === newUser)) {
-                showToast('Este usuario administrador ya existe', 'error');
+                showToast('Ese usuario ya existe', 'error');
                 return;
             }
 
@@ -931,21 +926,21 @@
             document.getElementById('newAdminPass').value = '';
 
             renderAdminAccountsList();
-            showToast(`Cuenta de administrador agregada: ${newUser}`, 'success');
+            showToast(`Admin agregado: ${newUser}`, 'success');
         }
 
         function deleteAdminAccount(idx) {
             if(adminAccounts.length <= 1) {
-                showToast('Debe existir al menos un administrador en el sistema', 'error');
+                showToast('Debe existir al menos un administrador', 'error');
                 return;
             }
             const acc = adminAccounts[idx];
-            if(!confirm(`¿Estás seguro de eliminar al administrador ${acc.user}?`)) return;
+            if(!confirm(`¿Eliminar al administrador ${acc.user}?`)) return;
 
             adminAccounts.splice(idx, 1);
             localStorage.setItem('cwt_admin_accounts_v16', JSON.stringify(adminAccounts));
             renderAdminAccountsList();
-            showToast('Cuenta de administrador eliminada', 'info');
+            showToast('Administrador eliminado', 'info');
         }
 
         function updateStats() {
@@ -990,17 +985,17 @@
 
                 const badge = document.getElementById('detectedBadge');
                 if(p.stock <= p.rop) {
-                    badge.className = "text-xs px-2.5 py-1 rounded-full font-bold bg-rose-100 text-rose-800";
+                    badge.className = "text-[11px] px-2 py-0.5 rounded-full font-bold bg-rose-100 text-rose-800";
                     badge.innerText = "⚠️ REABASTECER";
                 } else {
-                    badge.className = "text-xs px-2.5 py-1 rounded-full font-bold bg-emerald-100 text-emerald-800";
+                    badge.className = "text-[11px] px-2 py-0.5 rounded-full font-bold bg-emerald-100 text-emerald-800";
                     badge.innerText = "Stock OK";
                 }
 
                 if(p.warehouse !== currentWh) {
                     whWarn.classList.remove('hidden');
                     detectedProductWh = p.warehouse;
-                    document.getElementById('detectedWhText').innerText = `Este producto está asignado únicamente a: ${getWarehouseName(p.warehouse)}`;
+                    document.getElementById('detectedWhText').innerText = `Asignado a: ${getWarehouseName(p.warehouse)}`;
                 } else {
                     whWarn.classList.add('hidden');
                     detectedProductWh = null;
@@ -1027,19 +1022,19 @@
             const currentWh = document.getElementById('appWarehouseSelect').value;
 
             if(!barcode) {
-                showToast('Por favor escanea o ingresa un código', 'warning');
+                showToast('Escanea o ingresa un código', 'warning');
                 return;
             }
 
             const p = products.find(x => x.barcode === barcode);
 
             if(!p) {
-                showToast(`El código ${barcode} no existe en la base de datos.`, 'error');
+                showToast(`El código ${barcode} no existe.`, 'error');
                 return;
             }
 
             if(p.warehouse !== currentWh) {
-                showToast(`Error: Este producto está asignado a ${getWarehouseName(p.warehouse)}`, 'error');
+                showToast(`Error: Asignado a ${getWarehouseName(p.warehouse)}`, 'error');
                 return;
             }
 
@@ -1081,13 +1076,12 @@
             updateStats();
             detectProduct(barcode);
 
-            showToast(`${type} registrada (${dateFormatted}): ${qty} ${p.unit} de ${p.name}`, type === 'ENTRADA' ? 'success' : 'info');
+            showToast(`${type} registrada: ${qty} ${p.unit} de ${p.name}`, type === 'ENTRADA' ? 'success' : 'info');
 
             document.getElementById('barcodeInput').value = '';
             document.getElementById('barcodeInput').focus();
         }
 
-        // --- BULLETPROOF ROBUST CAMERA SCANNER ---
         function toggleCamera() {
             if(cameraRunning) stopCamera();
             else startCamera();
@@ -1101,7 +1095,7 @@
 
             const cameraConfig = {
                 fps: 20,
-                qrbox: { width: 260, height: 160 }
+                qrbox: { width: 240, height: 150 }
             };
 
             html5QrcodeScanner.start(
@@ -1129,13 +1123,13 @@
             playScanBeep();
             document.getElementById('barcodeInput').value = decodedText;
             detectProduct(decodedText);
-            showToast(`¡Código Leído!: ${decodedText}`, 'success');
+            showToast(`Código Leído: ${decodedText}`, 'success');
             stopCamera();
         }
 
         function showCamError(err) {
             console.error(err);
-            showToast('Haz clic en el candado junto a la URL y permite el acceso a la Cámara', 'error');
+            showToast('Permite el acceso a la cámara en el navegador', 'error');
             document.getElementById('cameraContainer').classList.add('hidden');
         }
 
@@ -1153,11 +1147,10 @@
             }
         }
 
-        // --- PRODUCT MODAL & BARCODE ---
         function openProductModal() {
             document.getElementById('productForm').reset();
             document.getElementById('editIndex').value = "-1";
-            document.getElementById('modalTitle').innerText = "Registrar Nuevo Producto & Código";
+            document.getElementById('modalTitle').innerText = "Registrar Nuevo Producto";
             document.getElementById('mWarehouse').value = document.getElementById('appWarehouseSelect').value;
             autoGenerateCode();
             document.getElementById('productModal').classList.remove('hidden');
@@ -1180,7 +1173,7 @@
                     format: "CODE128",
                     lineColor: "#002060",
                     width: 2,
-                    height: 40,
+                    height: 35,
                     displayValue: true
                 });
             } catch(e) {}
@@ -1197,16 +1190,16 @@
             const editIdx = parseInt(document.getElementById('editIndex').value);
 
             if(editIdx === -1 && products.some(p => p.barcode === barcode)) {
-                showToast('Este código de barras ya existe en el sistema', 'error');
+                showToast('Este código de barras ya existe', 'error');
                 return;
             }
 
             if(editIdx >= 0) {
                 products[editIdx] = { barcode, name, warehouse, unit, stock, rop };
-                showToast('Producto actualizado exitosamente', 'success');
+                showToast('Producto actualizado', 'success');
             } else {
                 products.push({ barcode, name, warehouse, unit, stock, rop });
-                showToast('Nuevo producto registrado en la base de datos', 'success');
+                showToast('Producto guardado', 'success');
             }
 
             localStorage.setItem('cwt_products_v16', JSON.stringify(products));
@@ -1228,13 +1221,13 @@
             document.getElementById('mStock').value = p.stock;
             document.getElementById('mROP').value = p.rop;
 
-            document.getElementById('modalTitle').innerText = "Editar Producto & Código";
+            document.getElementById('modalTitle').innerText = "Editar Producto";
             previewBarcode();
             document.getElementById('productModal').classList.remove('hidden');
         }
 
         function deleteProduct(barcode) {
-            if(!confirm(`¿Estás seguro de eliminar el producto con código ${barcode}?`)) return;
+            if(!confirm(`¿Eliminar producto ${barcode}?`)) return;
             products = products.filter(p => p.barcode !== barcode);
             localStorage.setItem('cwt_products_v16', JSON.stringify(products));
             renderInventory();
@@ -1249,7 +1242,7 @@
                     format: "CODE128",
                     lineColor: "#000",
                     width: 2,
-                    height: 50,
+                    height: 45,
                     displayValue: true
                 });
             } catch(e) {}
@@ -1260,10 +1253,9 @@
             document.getElementById('printModal').classList.add('hidden');
         }
 
-        // --- EXPORT KARDEX TO NATIVE EXCEL (.XLSX) WITH SHEETJS ---
         function exportKardexCSV() {
             if(!kardex || kardex.length === 0) {
-                showToast('No hay datos en el Kardex para exportar', 'warning');
+                showToast('No hay datos para exportar', 'warning');
                 return;
             }
 
@@ -1304,7 +1296,7 @@
                     ];
 
                     XLSX.writeFile(wb, "Kardex_CWT_" + new Date().toISOString().split('T')[0] + ".xlsx");
-                    showToast('Kardex exportado a Excel (.xlsx) correctamente', 'success');
+                    showToast('Kardex exportado a Excel (.xlsx)', 'success');
                     return;
                 }
             } catch(e) {
@@ -1343,10 +1335,9 @@
             document.body.removeChild(link);
             URL.revokeObjectURL(url);
 
-            showToast('Kardex exportado a Excel correctamente', 'success');
+            showToast('Kardex exportado a Excel', 'success');
         }
 
-        // --- SEARCH & TABS ---
         function filterTables() {
             const query = document.getElementById('searchInput').value.toLowerCase().trim();
             const rows = document.querySelectorAll('#inventoryBody tr, #kardexBody tr');
@@ -1360,17 +1351,16 @@
             if(t === 'inventory') {
                 document.getElementById('tabInventory').classList.remove('hidden');
                 document.getElementById('tabKardex').classList.add('hidden');
-                document.getElementById('tabBtnInventory').className = "flex-1 py-2.5 font-bold text-xs uppercase tracking-wider rounded-xl bg-white shadow text-cwt-800 transition";
-                document.getElementById('tabBtnKardex').className = "flex-1 py-2.5 font-bold text-xs uppercase tracking-wider rounded-xl text-slate-500 hover:bg-white/50 transition";
+                document.getElementById('tabBtnInventory').className = "flex-1 py-2 font-bold text-[11px] sm:text-xs uppercase tracking-wider rounded-xl bg-white shadow text-cwt-800 transition";
+                document.getElementById('tabBtnKardex').className = "flex-1 py-2 font-bold text-[11px] sm:text-xs uppercase tracking-wider rounded-xl text-slate-500 hover:bg-white/50 transition";
             } else {
                 document.getElementById('tabInventory').classList.add('hidden');
                 document.getElementById('tabKardex').classList.remove('hidden');
-                document.getElementById('tabBtnKardex').className = "flex-1 py-2.5 font-bold text-xs uppercase tracking-wider rounded-xl text-slate-500 hover:bg-white/50 transition";
-                document.getElementById('tabBtnInventory').className = "flex-1 py-2.5 font-bold text-xs uppercase tracking-wider rounded-xl text-slate-500 hover:bg-white/50 transition";
+                document.getElementById('tabBtnKardex').className = "flex-1 py-2 font-bold text-[11px] sm:text-xs uppercase tracking-wider rounded-xl text-slate-500 hover:bg-white/50 transition";
+                document.getElementById('tabBtnInventory').className = "flex-1 py-2 font-bold text-[11px] sm:text-xs uppercase tracking-wider rounded-xl text-slate-500 hover:bg-white/50 transition";
             }
         }
 
-        // --- TOAST SYSTEM ---
         function showToast(msg, type = 'info') {
             const container = document.getElementById('toastContainer');
             const toast = document.createElement('div');
@@ -1389,7 +1379,7 @@
                 icon = '<i class="fa-solid fa-bell text-amber-400"></i>';
             }
 
-            toast.className = `${bg} p-4 rounded-2xl shadow-2xl flex items-center gap-3 text-xs font-bold pointer-events-auto transition-all transform translate-y-2 opacity-0`;
+            toast.className = `${bg} p-3 rounded-2xl shadow-xl flex items-center gap-2.5 text-xs font-bold pointer-events-auto transition-all transform translate-y-2 opacity-0`;
             toast.innerHTML = `${icon} <span>${msg}</span>`;
 
             container.appendChild(toast);
@@ -1397,8 +1387,14 @@
             setTimeout(() => {
                 toast.classList.add('opacity-0', 'translate-y-2');
                 setTimeout(() => toast.remove(), 300);
-            }, 3500);
+            }, 3000);
         }
     </script>
 </body>
 </html>
+"""
+
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(optimized_html)
+
+print("Optimized index.html saved successfully! Size:", len(optimized_html))
